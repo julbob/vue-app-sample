@@ -6,20 +6,26 @@ name: Node.js CI
 on:
   push:
     tags: '*'
-    branches: [ "main", "github-action-ci" ]
+    branches: '*'
   pull_request:
-    branches: [ "main", "github-action-ci"  ]
+    branches: '*'
+  release:
+    types:
+      - published
+      - unpublished
+      - created
+      - edited
+      - deleted
+      - prereleased
+      - released
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
